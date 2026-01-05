@@ -30,7 +30,7 @@ up:
 	@echo "$(YELLOW)Starting containers...$(NC)"
 	@docker-compose -f $(COMPOSE_FILE) up -d
 	@echo "$(GREEN)Containers are running!$(NC)"
-	@echo "$(YELLOW)Access WordPress at: https://localhost$(NC)"
+	@echo "$(YELLOW)Access WordPress at: https://zchtaibi.42.fr$(NC)"
 
 # Stop all containers
 down:
