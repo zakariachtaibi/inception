@@ -5,7 +5,6 @@ RUN apt update && apt install -y \
     openssl && \
     rm -rf /var/lib/apt/lists/*
 
-# Generate self-signed SSL certificate
 RUN mkdir -p /etc/nginx/ssl && \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/nginx.key \
@@ -17,7 +16,8 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /var/run/nginx && \
     mkdir -p /var/www/html && \
     chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html
+    chmod -R 755 /var/www/html && \
+    rm -f /var/www/html/index.nginx-debian.html
 
 EXPOSE 443
 

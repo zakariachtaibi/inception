@@ -7,6 +7,8 @@ until mysqladmin ping -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASSWORD" &>/dev/null; do
     sleep 3
 done
 
+WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_pass)
+
 echo "MariaDB is up - executing WordPress setup"
 
 # Download WordPress if not exists
@@ -43,6 +45,9 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 else
     echo "WordPress already installed"
 fi
+
+# Remove nginx default file if exists
+rm -f /var/www/html/index.nginx-debian.html
 
 # Set proper permissions
 chown -R www-data:www-data /var/www/html

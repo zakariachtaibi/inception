@@ -12,33 +12,33 @@ NC = \033[0m
 
 all: build up
 
-# Create data directories for volumes
 setup:
 	@echo "$(YELLOW)Creating data directories...$(NC)"
 	@mkdir -p $(DATA_PATH)/mariadb
 	@mkdir -p $(DATA_PATH)/wordpress
 	@echo "$(GREEN)Data directories created!$(NC)"
 
-# Build all containers
 build: setup
 	@echo "$(YELLOW)Building containers...$(NC)"
 	@docker-compose -f $(COMPOSE_FILE) build
 	@echo "$(GREEN)Build completed!$(NC)"
 
-# Start all containers
 up:
 	@echo "$(YELLOW)Starting containers...$(NC)"
 	@docker-compose -f $(COMPOSE_FILE) up -d
 	@echo "$(GREEN)Containers are running!$(NC)"
 	@echo "$(YELLOW)Access WordPress at: https://zchtaibi.42.fr$(NC)"
 
-# Stop all containers
-down:
-	@echo "$(YELLOW)Stopping containers...$(NC)"
-	@docker-compose -f $(COMPOSE_FILE) down
-	@echo "$(GREEN)Containers stopped!$(NC)"
+stop:
+	@echo "$(YELLOW)stoping containers...$(NC)"
+	@docker compose -f $(COMPOSE_FILE) stop
+	@echo "$(GREEN)Containers stoped!$(NC)"
 
-# Clean containers and images
+down:
+	@echo "$(YELLOW)Removing containers...$(NC)"
+	@docker-compose -f $(COMPOSE_FILE) down
+	@echo "$(GREEN)Containers removed!$(NC)"
+
 clean: down
 	@echo "$(YELLOW)Cleaning containers and images...$(NC)"
 	@docker system prune -af
